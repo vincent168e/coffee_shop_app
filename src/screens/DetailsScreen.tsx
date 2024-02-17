@@ -2,18 +2,50 @@ import {ScrollView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {useStore} from '../store/store';
 import {COLORS} from '../theme/theme';
+import ImageBackgroundInfo from '../components/ImageBackgroundInfo';
 
 const DetailsScreen = ({navigation, route}: any) => {
   const ItemOfIndex = useStore((state: any) =>
     route.params.type == 'Coffee' ? state.CoffeeList : state.BeanList,
   )[route.params.index];
 
+  const BackHandler = () => {
+    navigation.pop();
+  };
+
+  const addToFavouriteList = useStore((state: any) => state.addToFavouriteList);
+  const deleteFromFavouriteList = useStore(
+    (state: any) => state.deleteFromFavouriteList,
+  );
+
+  const ToggleFavourite = (favourite: boolean, type: string, id: string) => {
+    favourite
+      ? deleteFromFavouriteList(type, id)
+      : addToFavouriteList(type, id);
+  };
+
   return (
     <View style={styles.ScreenContainer}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.ScrollViewFlex}></ScrollView>
+        contentContainerStyle={styles.ScrollViewFlex}>
+        <ImageBackgroundInfo
+          EnableBackHander={true}
+          imagelink_protrait={ItemOfIndex.imagelink_portrait}
+          type={ItemOfIndex.type}
+          id={ItemOfIndex.id}
+          favourite={ItemOfIndex.favourite}
+          name={ItemOfIndex.name}
+          special_ingredient={ItemOfIndex.special_ingredient}
+          ingredients={ItemOfIndex.ingredients}
+          average_rating={ItemOfIndex.average_rating}
+          ratings_count={ItemOfIndex.ratings_count}
+          roasted={ItemOfIndex.roasted}
+          BackHandler={BackHandler}
+          ToggleFavourite={ToggleFavourite}
+        />
+      </ScrollView>
     </View>
   );
 };

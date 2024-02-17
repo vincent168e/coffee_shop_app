@@ -10,7 +10,7 @@ export const useStore = create(
     CoffeeList: CoffeeData,
     BeanList: BeansData,
     CartPrice: 0,
-    FavoritesList: [],
+    FavouritesList: [],
     CartList: [],
     OrderHistoryList: [],
     addToCart: (cartItem: any) => set(produce(state => {
@@ -58,13 +58,15 @@ export const useStore = create(
       }
       state.CartPrice = totalPrice.toFixed(2).toString();
     })),
-    addToFavoriteList: (type: string, id: string) => set(produce(state => {
+    addToFavouriteList: (type: string, id: string) => set(produce(state => {
       if (type == 'Coffee') {
         for (let i = 0; i < state.CoffeeList.length; i++) {
           if (state.CoffeeList[i].id == id) {
             if (state.CoffeeList[i].favourite == false) {
               state.CoffeeList[i].favourite = true;
               state.FavoritesList.unshift(state.CoffeeList[i]);
+            } else {
+              state.CoffeeList[i].favourite = false;
             }
             break;
           }
@@ -75,18 +77,22 @@ export const useStore = create(
             if (state.BeanList[i].favourite == false) {
               state.BeanList[i].favourite = true;
               state.FavoritesList.unshift(state.BeanList[i]);
+            } else {
+              state.BeanList[i].favourite = false;
             }
             break;
           }
         }
       }
     })),
-    deleteFromFavoriteList: (type: string, id: string) => set(produce(state => {
+    deleteFromFavouriteList: (type: string, id: string) => set(produce(state => {
       if (type == 'Coffee') {
         for (let i = 0; i < state.CoffeeList.length; i++) {
           if (state.CoffeeList[i].id == id) {
             if (state.CoffeeList[i].favourite == true) {
               state.CoffeeList[i].favourite = false;
+            } else {
+              state.CoffeeList[i].favourite = true;
             }
             break;
           }
@@ -96,19 +102,21 @@ export const useStore = create(
           if (state.BeanList[i].id == id) {
             if (state.BeanList[i].favourite == true) {
               state.BeanList[i].favourite = false;
+            } else {
+              state.BeanList[i].favourite = true;
             }
             break;
           }
         }
       }
       let spliceIndex = -1;
-      for (let i = 0; i < state.FavoritesList.length; i++) {
-        if (state.FavoritesList[i].id == id) {
+      for (let i = 0; i < state.FavouritesList.length; i++) {
+        if (state.FavouritesList[i].id == id) {
           spliceIndex = i;
           break;
         }
       }
-      state.FavoritesList.splice(spliceIndex, 1);
+      state.FavouritesList.splice(spliceIndex, 1);
     }))
   }),
     {
