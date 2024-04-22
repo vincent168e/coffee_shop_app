@@ -28,10 +28,10 @@ const DetailsScreen = ({navigation, route}: any) => {
     navigation.pop();
   };
 
-  const addToFavouriteList = useStore((state: any) => state.addToFavouriteList);
+  const addToFavoritesList = useStore((state: any) => state.addToFavoritesList);
 
-  const deleteFromFavouriteList = useStore(
-    (state: any) => state.deleteFromFavouriteList,
+  const deleteFromFavoritesList = useStore(
+    (state: any) => state.deleteFromFavoritesList,
   );
 
   const addToCart = useStore((state: any) => state.addToCart);
@@ -42,10 +42,8 @@ const DetailsScreen = ({navigation, route}: any) => {
 
   const [fullDesc, setFullDesc] = useState(false);
 
-  const ToggleFavourite = (favourite: boolean, type: string, id: string) => {
-    favourite
-      ? deleteFromFavouriteList(type, id)
-      : addToFavouriteList(type, id);
+  const ToggleFavorite = (favorite: boolean, type: string, id: string) => {
+    favorite ? deleteFromFavoritesList(type, id) : addToFavoritesList(type, id);
   };
 
   const addToCartHandler = ({
@@ -83,7 +81,7 @@ const DetailsScreen = ({navigation, route}: any) => {
           imagelink_protrait={ItemOfIndex.imagelink_portrait}
           type={ItemOfIndex.type}
           id={ItemOfIndex.id}
-          favourite={ItemOfIndex.favourite}
+          favorite={ItemOfIndex.favorite}
           name={ItemOfIndex.name}
           special_ingredient={ItemOfIndex.special_ingredient}
           ingredients={ItemOfIndex.ingredients}
@@ -91,7 +89,7 @@ const DetailsScreen = ({navigation, route}: any) => {
           ratings_count={ItemOfIndex.ratings_count}
           roasted={ItemOfIndex.roasted}
           BackHandler={BackHandler}
-          ToggleFavourite={ToggleFavourite}
+          ToggleFavorite={ToggleFavorite}
         />
         <View style={styles.FooterInfoArea}>
           <Text style={styles.InfoTitle}>Description</Text>

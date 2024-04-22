@@ -22,7 +22,7 @@ interface ImageBackgroundInfoProps {
   imagelink_protrait: ImageProps;
   type: string;
   id: string;
-  favourite: boolean;
+  favorite: boolean;
   name: string;
   special_ingredient: string;
   ingredients: string;
@@ -30,7 +30,7 @@ interface ImageBackgroundInfoProps {
   ratings_count: string;
   roasted: string;
   BackHandler?: any;
-  ToggleFavourite: any;
+  ToggleFavorite: any;
 }
 
 const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
@@ -38,7 +38,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
   imagelink_protrait,
   type,
   id,
-  favourite,
+  favorite,
   name,
   special_ingredient,
   ingredients,
@@ -46,7 +46,7 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
   ratings_count,
   roasted,
   BackHandler,
-  ToggleFavourite,
+  ToggleFavorite,
 }) => {
   return (
     <View>
@@ -67,12 +67,12 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                ToggleFavourite(favourite, type, id);
+                ToggleFavorite(favorite, type, id);
               }}>
               <GradientBGIcon
                 name="like"
                 color={
-                  favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
+                  favorite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
                 }
                 size={FONTSIZE.size_16}
               />
@@ -82,12 +82,12 @@ const ImageBackgroundInfo: React.FC<ImageBackgroundInfoProps> = ({
           <View style={styles.ImageHeaderBarContainerWithoutBack}>
             <TouchableOpacity
               onPress={() => {
-                ToggleFavourite(favourite, type, id);
+                ToggleFavorite(favorite, type, id);
               }}>
               <GradientBGIcon
                 name="like"
                 color={
-                  favourite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
+                  favorite ? COLORS.primaryRedHex : COLORS.primaryLightGreyHex
                 }
                 size={FONTSIZE.size_16}
               />
